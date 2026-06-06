@@ -1,0 +1,1092 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VendorBridge - Smart Procurement & Vendor Management Portal</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Core Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ================= AUTH CONTAINER ================= -->
+  <div id="auth-container" class="auth-wrapper">
+    <div class="auth-glow"></div>
+    
+    <!-- LOGIN SCREEN -->
+    <div id="screen-login" class="auth-card active-card">
+      <div class="auth-header">
+        <div class="auth-logo">
+          <i class="fa-solid fa-bridge-water"></i>
+          <span>VendorBridge</span>
+        </div>
+        <h2>Welcome Back</h2>
+        <p>Enter your credentials to access the procurement portal</p>
+      </div>
+      <form id="form-login">
+        <div class="form-group">
+          <label for="login-email"><i class="fa-regular fa-envelope"></i> Email Address</label>
+          <input type="email" id="login-email" required placeholder="name@company.com" value="admin@vendorbridge.com">
+        </div>
+        <div class="form-group">
+          <label for="login-password"><i class="fa-solid fa-lock"></i> Password</label>
+          <input type="password" id="login-password" required placeholder="••••••••" value="password123">
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Sign In <i class="fa-solid fa-arrow-right-to-bracket"></i></button>
+      </form>
+      <div class="auth-footer">
+        <span>Don't have an account?</span>
+        <button id="btn-go-register" class="btn-link">Create Account</button>
+      </div>
+    </div>
+
+    <!-- REGISTRATION SCREEN -->
+    <div id="screen-register" class="auth-card">
+      <div class="auth-header">
+        <div class="auth-logo">
+          <i class="fa-solid fa-bridge-water"></i>
+          <span>VendorBridge</span>
+        </div>
+        <h2>Vendor Registration</h2>
+        <p>Register your company on our smart portal</p>
+      </div>
+      <form id="form-register">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="reg-first-name">First Name</label>
+            <input type="text" id="reg-first-name" required placeholder="John">
+          </div>
+          <div class="form-group">
+            <label for="reg-last-name">Last Name</label>
+            <input type="text" id="reg-last-name" required placeholder="Doe">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="reg-email">Email Address</label>
+            <input type="email" id="reg-email" required placeholder="john@company.com">
+          </div>
+          <div class="form-group">
+            <label for="reg-company">Company Name</label>
+            <input type="text" id="reg-company" required placeholder="Acme Corporation">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="reg-address">Address, State</label>
+            <input type="text" id="reg-address" required placeholder="123 Tech Blvd, CA">
+          </div>
+          <div class="form-group">
+            <label for="reg-country">Country</label>
+            <input type="text" id="reg-country" required placeholder="United States">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="reg-info">Additional Information</label>
+          <textarea id="reg-info" rows="2" placeholder="Tell us about your goods/services..."></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Register Supplier <i class="fa-solid fa-user-plus"></i></button>
+      </form>
+      <div class="auth-footer">
+        <span>Already have an account?</span>
+        <button id="btn-go-login" class="btn-link">Sign In</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= APP CONTAINER ================= -->
+  <div id="app-container" class="app-layout" style="display: none;">
+    
+    <!-- SIDEBAR NAVIGATION -->
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <div class="brand-logo">
+          <i class="fa-solid fa-bridge-water"></i>
+        </div>
+        <div class="brand-info">
+          <h2>VendorBridge</h2>
+          <span>Enterprise Portal</span>
+        </div>
+      </div>
+      
+      <nav class="sidebar-menu">
+        <ul>
+          <li class="menu-item active" data-view="dashboard">
+            <a href="#"><i class="fa-solid fa-chart-pie"></i> <span>Dashboard</span></a>
+          </li>
+          <li class="menu-item" data-view="vendors">
+            <a href="#"><i class="fa-solid fa-handshake"></i> <span>Vendors</span></a>
+          </li>
+          <li class="menu-item" data-view="rfqs">
+            <a href="#"><i class="fa-solid fa-file-invoice"></i> <span>RFQs</span></a>
+          </li>
+          <li class="menu-item" data-view="quotations">
+            <a href="#"><i class="fa-solid fa-tags"></i> <span>Submit Quotations</span></a>
+          </li>
+          <li class="menu-item" data-view="comparison">
+            <a href="#"><i class="fa-solid fa-scale-balanced"></i> <span>Compare Bids</span></a>
+          </li>
+          <li class="menu-item" data-view="approvals">
+            <a href="#"><i class="fa-solid fa-square-check"></i> <span>Approvals</span></a>
+          </li>
+          <li class="menu-item" data-view="invoices">
+            <a href="#"><i class="fa-solid fa-file-invoice-dollar"></i> <span>POs & Invoices</span></a>
+          </li>
+          <li class="menu-item" data-view="analytics">
+            <a href="#"><i class="fa-solid fa-chart-line"></i> <span>Reports & Analytics</span></a>
+          </li>
+          <li class="menu-item" data-view="logs">
+            <a href="#"><i class="fa-solid fa-list-ul"></i> <span>Activity & Logs</span></a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="sidebar-user">
+        <div class="user-avatar" id="user-avatar-initials">AD</div>
+        <div class="user-details">
+          <span class="user-name" id="header-username">Admin User</span>
+          <span class="user-role" id="header-userrole">Purchasing Manager</span>
+        </div>
+        <button id="btn-logout" title="Sign Out"><i class="fa-solid fa-power-off"></i></button>
+      </div>
+    </aside>
+
+    <!-- MAIN APP SCREEN WRAPPER -->
+    <div class="main-wrapper">
+      
+      <!-- TOP HEADER -->
+      <header class="header">
+        <div class="header-left">
+          <button id="btn-sidebar-toggle" class="btn-icon"><i class="fa-solid fa-bars"></i></button>
+          <h1 id="current-view-title">Dashboard</h1>
+        </div>
+        <div class="header-right">
+          <!-- Notification Bell -->
+          <div class="dropdown notification-dropdown">
+            <button class="btn-icon dropdown-toggle" id="btn-notifications">
+              <i class="fa-regular fa-bell"></i>
+              <span class="badge badge-error badge-dot" id="noti-dot" style="display: none;"></span>
+            </button>
+            <div class="dropdown-menu" id="notifications-menu">
+              <div class="dropdown-header">
+                <h3>Notifications</h3>
+                <button id="btn-clear-notifications" class="btn-link-small">Clear All</button>
+              </div>
+              <ul class="notification-list" id="notification-list-items">
+                <li class="notification-empty">No new notifications</li>
+              </ul>
+            </div>
+          </div>
+          <!-- Theme Toggle -->
+          <button id="btn-theme-toggle" class="btn-icon" title="Toggle Theme">
+            <i class="fa-solid fa-moon"></i>
+          </button>
+          <div class="header-divider"></div>
+          <div class="header-profile">
+            <span class="profile-greeting">Welcome, <strong id="greeting-username">Admin</strong></span>
+          </div>
+        </div>
+      </header>
+
+      <!-- VIEW AREA -->
+      <main class="content-area">
+        
+        <!-- 1. DASHBOARD VIEW -->
+        <section id="view-dashboard" class="app-view active-view">
+          <div class="dashboard-metrics">
+            <div class="metric-card glass-card">
+              <div class="card-icon blue-glow"><i class="fa-solid fa-handshake"></i></div>
+              <div class="card-info">
+                <h3>Total Vendors</h3>
+                <p class="metric-value" id="dash-vendors-count">0</p>
+                <span class="metric-trend up"><i class="fa-solid fa-arrow-up"></i> +2 this month</span>
+              </div>
+            </div>
+            <div class="metric-card glass-card">
+              <div class="card-icon purple-glow"><i class="fa-solid fa-file-contract"></i></div>
+              <div class="card-info">
+                <h3>Pending RFQs</h3>
+                <p class="metric-value" id="dash-rfqs-count">0</p>
+                <span class="metric-trend neutral"><i class="fa-solid fa-circle"></i> Active bidding</span>
+              </div>
+            </div>
+            <div class="metric-card glass-card">
+              <div class="card-icon green-glow"><i class="fa-solid fa-circle-dollar-to-slot"></i></div>
+              <div class="card-info">
+                <h3>Monthly Spend</h3>
+                <p class="metric-value" id="dash-spend">$0.00</p>
+                <span class="metric-trend up"><i class="fa-solid fa-arrow-up"></i> +4.2% vs last month</span>
+              </div>
+            </div>
+            <div class="metric-card glass-card">
+              <div class="card-icon orange-glow"><i class="fa-solid fa-receipt"></i></div>
+              <div class="card-info">
+                <h3>Active Invoices</h3>
+                <p class="metric-value" id="dash-invoices-count">0</p>
+                <span class="metric-trend down"><i class="fa-solid fa-arrow-down"></i> -1.5% cycle time</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="dashboard-grid">
+            <!-- Left Panel: Spend Trends -->
+            <div class="glass-card panel">
+              <div class="panel-header">
+                <h2>Spend Analysis & Distribution</h2>
+                <div class="panel-actions">
+                  <button class="btn-tab active-btn-tab" data-chart="spend">Monthly</button>
+                  <button class="btn-tab" data-chart="category">Category</button>
+                </div>
+              </div>
+              <div class="panel-content chart-container" id="dash-chart-wrapper">
+                <!-- Custom SVG Chart will render here -->
+                <svg id="dash-svg-chart" viewBox="0 0 500 240"></svg>
+              </div>
+            </div>
+
+            <!-- Right Panel: Recent Activities -->
+            <div class="glass-card panel">
+              <div class="panel-header">
+                <h2>Recent Activities & Logs</h2>
+                <button class="btn-link" id="btn-dash-view-logs">View All</button>
+              </div>
+              <div class="panel-content">
+                <ul class="activity-timeline" id="dash-activities-list">
+                  <!-- Rendered dynamically -->
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom: Quick Action Dashboard Bar -->
+          <div class="quick-actions-bar glass-card">
+            <h3>Quick Actions</h3>
+            <div class="quick-btn-group">
+              <button class="btn btn-secondary" onclick="app.switchView('vendors', true)"><i class="fa-solid fa-user-plus"></i> Register Vendor</button>
+              <button class="btn btn-secondary" onclick="app.switchView('rfqs', true)"><i class="fa-solid fa-plus"></i> Create New RFQ</button>
+              <button class="btn btn-secondary" onclick="app.switchView('comparison')"><i class="fa-solid fa-scale-balanced"></i> Compare Live Bids</button>
+              <button class="btn btn-primary" onclick="app.switchView('approvals')"><i class="fa-solid fa-check-double"></i> Review Pending Approvals</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- 2. VENDORS VIEW -->
+        <section id="view-vendors" class="app-view">
+          <div class="view-header-bar">
+            <div class="search-filter-row">
+              <div class="search-box">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="vendors-search" placeholder="Search vendors by name, contact or email...">
+              </div>
+              <div class="filter-dropdown-group">
+                <select id="vendors-filter-category" class="select-input">
+                  <option value="all">All Categories</option>
+                  <option value="Office Supplies">Office Supplies</option>
+                  <option value="IT Hardware">IT Hardware</option>
+                  <option value="Furniture">Furniture</option>
+                  <option value="Facilities">Facilities</option>
+                  <option value="Logistics">Logistics</option>
+                </select>
+                <select id="vendors-filter-status" class="select-input">
+                  <option value="all">All Statuses</option>
+                  <option value="Active">Active</option>
+                  <option value="Pending">Pending Approval</option>
+                  <option value="Suspended">Suspended</option>
+                </select>
+              </div>
+            </div>
+            <button class="btn btn-primary" id="btn-add-vendor-modal"><i class="fa-solid fa-plus"></i> Add Vendor</button>
+          </div>
+
+          <div class="glass-card table-wrapper">
+            <table class="data-table" id="vendors-table">
+              <thead>
+                <tr>
+                  <th>Vendor ID</th>
+                  <th>Vendor Name</th>
+                  <th>Contact Person</th>
+                  <th>Email</th>
+                  <th>Category</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="vendors-table-body">
+                <!-- Dynamically populated -->
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- 3. RFQS VIEW -->
+        <section id="view-rfqs" class="app-view">
+          <div class="tabs-sub-header">
+            <button class="tab-sub-btn active" id="tab-rfq-list">Active RFQs</button>
+            <button class="tab-sub-btn" id="tab-rfq-create">Create RFQ Wizard</button>
+          </div>
+
+          <!-- RFQ LIST SUB-VIEW -->
+          <div id="subview-rfq-list" class="subview active-subview">
+            <div class="glass-card table-wrapper">
+              <table class="data-table" id="rfq-table">
+                <thead>
+                  <tr>
+                    <th>RFQ ID</th>
+                    <th>Title</th>
+                    <th>Category</th>
+                    <th>Created Date</th>
+                    <th>Due Date</th>
+                    <th>Status</th>
+                    <th>Total Items</th>
+                    <th>Bids Recv.</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="rfq-table-body">
+                  <!-- Dynamically populated -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- CREATE RFQ SUB-VIEW (WIZARD) -->
+          <div id="subview-rfq-create" class="subview">
+            <div class="rfq-wizard-container glass-card">
+              <!-- Stepper -->
+              <div class="wizard-stepper">
+                <div class="step active-step" id="step-node-1">
+                  <div class="step-num">1</div>
+                  <div class="step-title">General Info</div>
+                </div>
+                <div class="step" id="step-node-2">
+                  <div class="step-num">2</div>
+                  <div class="step-title">Line Items</div>
+                </div>
+                <div class="step" id="step-node-3">
+                  <div class="step-num">3</div>
+                  <div class="step-title">Review & Submit</div>
+                </div>
+              </div>
+
+              <!-- Wizard Form Views -->
+              <form id="form-rfq-wizard">
+                <!-- Step 1: Details -->
+                <div class="wizard-step-panel active-step-panel" id="step-panel-1">
+                  <h3>General RFQ Specifications</h3>
+                  <div class="form-group">
+                    <label for="rfq-title">RFQ Title</label>
+                    <input type="text" id="rfq-title" placeholder="e.g. Office Furniture Procurement - 2026 Q3">
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label for="rfq-category">Procurement Category</label>
+                      <select id="rfq-category" class="select-input">
+                        <option value="Furniture">Furniture</option>
+                        <option value="Office Supplies">Office Supplies</option>
+                        <option value="IT Hardware">IT Hardware</option>
+                        <option value="Facilities">Facilities</option>
+                        <option value="Logistics">Logistics</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="rfq-due-date">Due Date</label>
+                      <input type="date" id="rfq-due-date">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="rfq-delivery-address">Delivery Address</label>
+                    <input type="text" id="rfq-delivery-address" placeholder="e.g. Headquarters, 5th Floor, Suite 500">
+                  </div>
+                  <div class="form-group">
+                    <label for="rfq-description">Detailed Description / Instructions</label>
+                    <textarea id="rfq-description" rows="3" placeholder="Provide additional guidelines for vendors bidding..."></textarea>
+                  </div>
+                  <div class="wizard-actions">
+                    <div></div> <!-- spacing -->
+                    <button type="button" class="btn btn-primary btn-next" data-next="2">Next Step <i class="fa-solid fa-arrow-right"></i></button>
+                  </div>
+                </div>
+
+                <!-- Step 2: Line Items -->
+                <div class="wizard-step-panel" id="step-panel-2">
+                  <div class="items-header">
+                    <h3>Purchase Line Items</h3>
+                    <button type="button" class="btn btn-secondary btn-small" id="btn-rfq-add-item"><i class="fa-solid fa-plus"></i> Add Item Line</button>
+                  </div>
+                  <div class="items-container-table">
+                    <table class="items-table" id="rfq-items-table">
+                      <thead>
+                        <tr>
+                          <th style="width: 35%;">Item Name</th>
+                          <th style="width: 35%;">Specifications / Description</th>
+                          <th style="width: 15%;">Quantity</th>
+                          <th style="width: 10%;">Unit</th>
+                          <th style="width: 5%;">Delete</th>
+                        </tr>
+                      </thead>
+                      <tbody id="rfq-items-body">
+                        <tr>
+                          <td><input type="text" class="item-name-input" required placeholder="e.g. Ergonomic Office Chair"></td>
+                          <td><input type="text" class="item-desc-input" placeholder="e.g. High back, black mesh, adjustable armrest"></td>
+                          <td><input type="number" class="item-qty-input" required min="1" value="10"></td>
+                          <td>
+                            <select class="item-unit-input">
+                              <option value="Pcs">Pcs</option>
+                              <option value="Sets">Sets</option>
+                              <option value="Boxes">Boxes</option>
+                              <option value="Lots">Lots</option>
+                            </select>
+                          </td>
+                          <td class="text-center"><button type="button" class="btn-delete-item text-danger"><i class="fa-regular fa-trash-can"></i></button></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="wizard-actions">
+                    <button type="button" class="btn btn-secondary btn-prev" data-prev="1"><i class="fa-solid fa-arrow-left"></i> Previous</button>
+                    <button type="button" class="btn btn-primary btn-next" data-next="3" id="btn-validate-step-2">Next Step <i class="fa-solid fa-arrow-right"></i></button>
+                  </div>
+                </div>
+
+                <!-- Step 3: Review & Submit -->
+                <div class="wizard-step-panel" id="step-panel-3">
+                  <h3>Verify & Publish Request</h3>
+                  <div class="rfq-preview-box">
+                    <div class="preview-meta">
+                      <div class="preview-item"><strong>Title:</strong> <span id="preview-rfq-title">-</span></div>
+                      <div class="preview-item"><strong>Category:</strong> <span id="preview-rfq-category">-</span></div>
+                      <div class="preview-item"><strong>Due Date:</strong> <span id="preview-rfq-due">-</span></div>
+                      <div class="preview-item"><strong>Delivery:</strong> <span id="preview-rfq-address">-</span></div>
+                    </div>
+                    <div class="preview-desc">
+                      <strong>Instructions:</strong>
+                      <p id="preview-rfq-desc">-</p>
+                    </div>
+                    <div class="preview-items-list">
+                      <strong>Line Items Checklist:</strong>
+                      <table class="compact-table">
+                        <thead>
+                          <tr>
+                            <th>Item Name</th>
+                            <th>Description</th>
+                            <th>Qty</th>
+                            <th>Unit</th>
+                          </tr>
+                        </thead>
+                        <tbody id="preview-rfq-items-body">
+                          <!-- rendered dynamically -->
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <div class="wizard-actions">
+                    <button type="button" class="btn btn-secondary btn-prev" data-prev="2"><i class="fa-solid fa-arrow-left"></i> Edit Details</button>
+                    <button type="submit" class="btn btn-success" id="btn-submit-rfq-wizard">Publish RFQ <i class="fa-solid fa-cloud-arrow-up"></i></button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </section>
+
+        <!-- 4. SUBMIT QUOTATIONS VIEW -->
+        <section id="view-quotations" class="app-view">
+          <div class="quotations-layout">
+            
+            <!-- Left Side: Active RFQs Select list -->
+            <div class="glass-card quote-selection-panel">
+              <h3>Select RFQ to Bid On</h3>
+              <ul class="rfq-quote-list" id="quote-rfq-list">
+                <!-- Dynamically populated -->
+              </ul>
+            </div>
+
+            <!-- Right Side: Bid entry form -->
+            <div class="glass-card quote-form-panel">
+              <div id="quote-no-selection" class="empty-state">
+                <i class="fa-solid fa-receipt"></i>
+                <h3>No RFQ Selected</h3>
+                <p>Select an active RFQ from the left sidebar to prepare and submit a vendor quotation.</p>
+              </div>
+
+              <div id="quote-form-wrapper" style="display: none;">
+                <div class="quote-header">
+                  <div>
+                    <h2 id="quote-rfq-title-header">Submit Quotation</h2>
+                    <span class="badge badge-info" id="quote-rfq-category-tag">Office Supplies</span>
+                  </div>
+                  <div class="text-right">
+                    <span class="text-muted text-small">Due Date:</span>
+                    <strong id="quote-rfq-due-tag" class="d-block">15 Jun 2026</strong>
+                  </div>
+                </div>
+
+                <form id="form-submit-quote">
+                  <input type="hidden" id="quote-rfq-id-val">
+                  
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label for="quote-vendor-select">Bidding Vendor Profile</label>
+                      <select id="quote-vendor-select" class="select-input" required>
+                        <!-- Loaded dynamically based on active vendors -->
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="quote-delivery-time">Estimated Delivery Time</label>
+                      <input type="text" id="quote-delivery-time" placeholder="e.g. 5 business days" required>
+                    </div>
+                  </div>
+
+                  <h4>Quote Itemized Pricing</h4>
+                  <table class="quote-items-table">
+                    <thead>
+                      <tr>
+                        <th>Item Details</th>
+                        <th style="width: 15%;">Qty</th>
+                        <th style="width: 25%;">Unit Price ($)</th>
+                        <th style="width: 25%;">Total Price ($)</th>
+                      </tr>
+                    </thead>
+                    <tbody id="quote-items-input-rows">
+                      <!-- Rendered dynamically depending on RFQ line items -->
+                    </tbody>
+                  </table>
+
+                  <div class="quote-summary-block">
+                    <div class="form-row">
+                      <div class="form-group">
+                        <label for="quote-tax-rate">Tax Rate (%)</label>
+                        <input type="number" id="quote-tax-rate" min="0" max="100" value="8" step="0.1">
+                      </div>
+                      <div class="form-group">
+                        <label for="quote-shipping">Shipping & Handling ($)</label>
+                        <input type="number" id="quote-shipping" min="0" value="50" step="0.01">
+                      </div>
+                    </div>
+                    
+                    <div class="financial-breakdown">
+                      <div class="finance-row"><span>Items Subtotal:</span> <strong id="quote-subtotal">$0.00</strong></div>
+                      <div class="finance-row"><span>Tax amount:</span> <strong id="quote-tax-amount">$0.00</strong></div>
+                      <div class="finance-row"><span>Shipping:</span> <strong id="quote-shipping-amount">$50.00</strong></div>
+                      <div class="finance-row grand-total"><span>Grand Total:</span> <strong id="quote-grand-total">$0.00</strong></div>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="quote-notes">Payment Terms / Special Notes</label>
+                    <textarea id="quote-notes" rows="2" placeholder="e.g. Net 30, warranty coverage info, or substitution alerts..."></textarea>
+                  </div>
+
+                  <button type="submit" class="btn btn-success btn-block">Submit Quotation Proposal <i class="fa-solid fa-paper-plane"></i></button>
+                </form>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- 5. QUOTATIONS COMPARISON VIEW -->
+        <section id="view-comparison" class="app-view">
+          <div class="comparison-header-selector glass-card">
+            <label for="compare-rfq-selector"><i class="fa-solid fa-list-check"></i> Choose RFQ to Compare Quotations:</label>
+            <select id="compare-rfq-selector" class="select-input">
+              <option value="">-- Select RFQ --</option>
+              <!-- Loaded dynamically -->
+            </select>
+          </div>
+
+          <div id="compare-empty-state" class="empty-state glass-card">
+            <i class="fa-solid fa-scale-unbalanced-flip"></i>
+            <h3>No RFQ Selected</h3>
+            <p>Please select an RFQ from the dropdown above to view a side-by-side bid comparison analysis matrix.</p>
+          </div>
+
+          <div id="compare-no-quotes-state" class="empty-state glass-card" style="display: none;">
+            <i class="fa-solid fa-hourglass-half"></i>
+            <h3>No Quotations Received Yet</h3>
+            <p>There are currently no bidding submissions for this RFQ. Head over to the "Submit Quotations" tab to submit bids representing various vendors.</p>
+          </div>
+
+          <div id="compare-matrix-wrapper" style="display: none;">
+            <!-- Bid highlights info -->
+            <div class="comparison-summary-cards">
+              <div class="comp-summary-card best-deal glass-card">
+                <i class="fa-solid fa-circle-check text-success"></i>
+                <div>
+                  <h4>Best Option (Lowest Price)</h4>
+                  <p id="comp-best-vendor">-</p>
+                  <span id="comp-best-price">$0.00</span>
+                </div>
+              </div>
+              <div class="comp-summary-card delivery-deal glass-card">
+                <i class="fa-solid fa-truck-fast text-info"></i>
+                <div>
+                  <h4>Fastest Delivery</h4>
+                  <p id="comp-fastest-vendor">-</p>
+                  <span id="comp-fastest-time">-</span>
+                </div>
+              </div>
+              <div class="comp-summary-card submissions-count glass-card">
+                <i class="fa-solid fa-people-group text-purple"></i>
+                <div>
+                  <h4>Submissions</h4>
+                  <p>Total Bids Recv.</p>
+                  <span id="comp-total-bids">0</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Comparison Grid -->
+            <div class="glass-card table-wrapper">
+              <table class="comparison-table" id="comparison-matrix-table">
+                <!-- Programmatically generated grid matrix -->
+              </table>
+            </div>
+
+            <div class="comparison-disclaimer text-danger text-small">
+              <i class="fa-solid fa-circle-info"></i> Green columns highlight the most competitive prices per line item and overall. Click "Select Proposal & Route for Approval" to trigger approval workflow for the chosen vendor.
+            </div>
+          </div>
+        </section>
+
+        <!-- 6. APPROVALS VIEW -->
+        <section id="view-approvals" class="app-view">
+          <div class="approvals-layout">
+            <!-- Left Panel: Pending Approval List -->
+            <div class="glass-card approval-selection-panel">
+              <h3>RFQ Workflow Reviews</h3>
+              <ul class="approval-rfq-list" id="approval-rfq-list-items">
+                <!-- Dynamically populated -->
+              </ul>
+            </div>
+
+            <!-- Right Panel: Visual Workflow Detail -->
+            <div class="glass-card approval-detail-panel">
+              <div id="approval-no-selection" class="empty-state">
+                <i class="fa-solid fa-shield-halved"></i>
+                <h3>Select Approval Item</h3>
+                <p>Choose an RFQ under evaluation from the sidebar to inspect approval routing timeline, details, and execute workflow updates.</p>
+              </div>
+
+              <div id="approval-details-wrapper" style="display: none;">
+                <div class="approval-header">
+                  <div>
+                    <h2 id="approval-title-header">Office Furniture Procurement</h2>
+                    <span class="badge badge-warning" id="approval-status-badge">Pending Manager Approval</span>
+                  </div>
+                  <div class="text-right">
+                    <span class="text-muted text-small">Selected Supplier:</span>
+                    <strong class="d-block text-primary" id="approval-selected-supplier">Office Depot</strong>
+                    <span class="badge badge-success" id="approval-bid-total">$14,500.00</span>
+                  </div>
+                </div>
+
+                <!-- Step Timeline Progress -->
+                <div class="workflow-stepper">
+                  <div class="wf-step" id="wf-step-1">
+                    <div class="wf-node"><i class="fa-solid fa-circle-user"></i></div>
+                    <div class="wf-info">
+                      <h4>1. Purchasing Mgr</h4>
+                      <span class="wf-status" id="wf-status-1">Pending</span>
+                    </div>
+                  </div>
+                  <div class="wf-step-line"></div>
+                  <div class="wf-step" id="wf-step-2">
+                    <div class="wf-node"><i class="fa-solid fa-money-bill-transfer"></i></div>
+                    <div class="wf-info">
+                      <h4>2. Finance Dir</h4>
+                      <span class="wf-status" id="wf-status-2">Locked</span>
+                    </div>
+                  </div>
+                  <div class="wf-step-line"></div>
+                  <div class="wf-step" id="wf-step-3">
+                    <div class="wf-node"><i class="fa-solid fa-signature"></i></div>
+                    <div class="wf-info">
+                      <h4>3. VP Procurement</h4>
+                      <span class="wf-status" id="wf-status-3">Locked</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Item details recap -->
+                <div class="approval-meta-grid">
+                  <div class="meta-col">
+                    <strong>RFQ Reference:</strong> <span id="approval-rfq-ref">RFQ-2026-001</span>
+                  </div>
+                  <div class="meta-col">
+                    <strong>Payment Terms:</strong> <span id="approval-pay-terms">Net 30</span>
+                  </div>
+                  <div class="meta-col">
+                    <strong>Target Delivery:</strong> <span id="approval-deliv-est">5 days</span>
+                  </div>
+                  <div class="meta-col">
+                    <strong>Requester:</strong> <span id="approval-requester">John Doe (Purchasing)</span>
+                  </div>
+                </div>
+
+                <!-- Quotation line items -->
+                <div class="approval-items-recap">
+                  <h4>Selected Quotation Details</h4>
+                  <table class="compact-table">
+                    <thead>
+                      <tr>
+                        <th>Item</th>
+                        <th>Qty</th>
+                        <th>Unit Bid ($)</th>
+                        <th>Total ($)</th>
+                      </tr>
+                    </thead>
+                    <tbody id="approval-items-recap-body">
+                      <!-- dynamically filled -->
+                    </tbody>
+                  </table>
+                </div>
+
+                <!-- Logs and comments -->
+                <div class="approval-comments-section">
+                  <h4>Workflow Comments & Audit</h4>
+                  <div class="workflow-history-timeline" id="approval-comments-timeline">
+                    <!-- rendered dynamically -->
+                  </div>
+
+                  <!-- Actions Box -->
+                  <div class="approval-actions-box" id="approval-action-controls">
+                    <div class="form-group">
+                      <label for="approval-comment-input">Review Comment (Required for decisions)</label>
+                      <input type="text" id="approval-comment-input" placeholder="e.g. Approved. Pricing is within budget allocations.">
+                    </div>
+                    <div class="approval-buttons">
+                      <button class="btn btn-danger" id="btn-workflow-reject"><i class="fa-solid fa-ban"></i> Reject Proposal</button>
+                      <button class="btn btn-success" id="btn-workflow-approve"><i class="fa-solid fa-circle-check"></i> Approve Workflow</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 7. POS & INVOICES VIEW -->
+        <section id="view-invoices" class="app-view">
+          <div class="invoices-layout">
+            <!-- Left panel: List of generated POs / Invoices -->
+            <div class="glass-card invoice-list-panel">
+              <h3>POs & Invoices Ledger</h3>
+              <ul class="po-invoice-list" id="invoice-sidebar-list">
+                <!-- Dynamically populated -->
+              </ul>
+            </div>
+
+            <!-- Right panel: Document view & Exporter -->
+            <div class="glass-card invoice-detail-panel">
+              <div id="invoice-no-selection" class="empty-state">
+                <i class="fa-solid fa-file-pdf"></i>
+                <h3>No PO/Invoice Selected</h3>
+                <p>Choose an approved purchase order from the left sidebar to display, print, or download invoices.</p>
+              </div>
+
+              <div id="invoice-details-wrapper" style="display: none;">
+                <!-- Exporter toolbar -->
+                <div class="doc-toolbar">
+                  <span class="text-muted"><i class="fa-solid fa-print"></i> Document Exporter:</span>
+                  <div class="toolbar-buttons">
+                    <button class="btn btn-secondary btn-small" id="btn-export-print"><i class="fa-solid fa-print"></i> Print</button>
+                    <button class="btn btn-secondary btn-small" id="btn-export-png"><i class="fa-solid fa-file-image"></i> Download PNG</button>
+                    <button class="btn btn-primary btn-small" id="btn-export-pdf"><i class="fa-solid fa-file-pdf"></i> Download PDF</button>
+                  </div>
+                </div>
+
+                <!-- Printable Invoice Sheet -->
+                <div class="invoice-container-sheet" id="invoice-printable-sheet">
+                  <div class="invoice-sheet-glow"></div>
+                  
+                  <div class="invoice-sheet-header">
+                    <div class="invoice-logo">
+                      <i class="fa-solid fa-bridge-water"></i>
+                      <div>
+                        <h2>VendorBridge</h2>
+                        <span>Procurement System</span>
+                      </div>
+                    </div>
+                    <div class="invoice-doc-details">
+                      <h1 id="inv-sheet-type">PURCHASE ORDER</h1>
+                      <div class="inv-meta-tag">Doc ID: <span id="inv-sheet-number">PO-2026-0001</span></div>
+                      <div class="inv-meta-tag">Date: <span id="inv-sheet-date">06 June 2026</span></div>
+                      <div class="inv-meta-tag">RFQ Ref: <span id="inv-sheet-rfq-ref">RFQ-26-01</span></div>
+                    </div>
+                  </div>
+
+                  <hr class="inv-divider">
+
+                  <div class="invoice-address-grid">
+                    <div class="addr-block">
+                      <h4>ISSUED TO (Supplier):</h4>
+                      <strong id="inv-supplier-name">Office Depot Inc</strong>
+                      <p id="inv-supplier-email">orders@officedepot.com</p>
+                      <p id="inv-supplier-address">456 Retail Way, San Francisco, CA</p>
+                      <p id="inv-supplier-country">United States</p>
+                    </div>
+                    <div class="addr-block">
+                      <h4>DELIVER TO (Buyer):</h4>
+                      <strong>VendorBridge Operations</strong>
+                      <p id="inv-buyer-email">finance@vendorbridge.com</p>
+                      <p id="inv-buyer-address">123 Tech Avenue, Suite 100</p>
+                      <p id="inv-buyer-country">United States</p>
+                    </div>
+                  </div>
+
+                  <div class="invoice-table-wrapper">
+                    <table class="invoice-sheet-table">
+                      <thead>
+                        <tr>
+                          <th style="width: 50%;">Item Description</th>
+                          <th style="width: 15%; text-align: center;">Qty</th>
+                          <th style="width: 15%; text-align: right;">Unit Price ($)</th>
+                          <th style="width: 20%; text-align: right;">Total ($)</th>
+                        </tr>
+                      </thead>
+                      <tbody id="inv-sheet-items">
+                        <!-- Filled dynamically -->
+                      </tbody>
+                    </table>
+                  </div>
+
+                  <div class="invoice-sheet-summary">
+                    <div class="inv-notes">
+                      <h4>Notes & Instructions:</h4>
+                      <p id="inv-sheet-notes">Net 30 Payment terms apply. Please reference the Purchase Order ID on all shipping labels and correspondence.</p>
+                      <div class="auth-signatures">
+                        <div class="sig-block">
+                          <div class="sig-line" id="inv-sheet-signature">System Approved</div>
+                          <span>Authorized Signatory</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="inv-totals-box">
+                      <div class="inv-total-row">Subtotal: <span id="inv-sheet-subtotal">$0.00</span></div>
+                      <div class="inv-total-row">Tax rate: <span id="inv-sheet-tax-rate">8%</span></div>
+                      <div class="inv-total-row">Tax Amount: <span id="inv-sheet-tax">$0.00</span></div>
+                      <div class="inv-total-row">Shipping: <span id="inv-sheet-shipping">$50.00</span></div>
+                      <div class="inv-total-row grand-total">Grand Total: <span id="inv-sheet-grand-total">$0.00</span></div>
+                    </div>
+                  </div>
+
+                  <div class="invoice-sheet-footer">
+                    <p>Thank you for doing business with VendorBridge. For any inquiry, contact support@vendorbridge.com</p>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 8. REPORTS & ANALYTICS VIEW -->
+        <section id="view-analytics" class="app-view">
+          <div class="view-header-bar flex-column align-stretch">
+            <div class="d-flex justify-between align-center margin-bottom-md">
+              <h3>System Financial Health & Compliance</h3>
+              <div class="d-flex gap-sm">
+                <button class="btn btn-secondary btn-small" id="btn-export-reports"><i class="fa-solid fa-download"></i> Export Reports</button>
+              </div>
+            </div>
+            
+            <div class="dashboard-metrics">
+              <div class="metric-card glass-card">
+                <div class="card-icon green-glow"><i class="fa-solid fa-vault"></i></div>
+                <div class="card-info">
+                  <h3>Total Spend YTD</h3>
+                  <p class="metric-value" id="report-total-spend">$0.00</p>
+                  <span class="metric-trend up"><i class="fa-solid fa-arrow-up"></i> +12% YoY</span>
+                </div>
+              </div>
+              <div class="metric-card glass-card">
+                <div class="card-icon blue-glow"><i class="fa-solid fa-percent"></i></div>
+                <div class="card-info">
+                  <h3>Procurement Savings</h3>
+                  <p class="metric-value" id="report-avg-savings">18.4%</p>
+                  <span class="metric-trend up"><i class="fa-solid fa-arrow-up"></i> Target 15%</span>
+                </div>
+              </div>
+              <div class="metric-card glass-card">
+                <div class="card-icon purple-glow"><i class="fa-solid fa-file-invoice-dollar"></i></div>
+                <div class="card-info">
+                  <h3>Active POs</h3>
+                  <p class="metric-value" id="report-active-pos">0</p>
+                  <span class="metric-trend neutral"><i class="fa-solid fa-circle"></i> Healthy cycle</span>
+                </div>
+              </div>
+              <div class="metric-card glass-card">
+                <div class="card-icon orange-glow"><i class="fa-solid fa-circle-exclamation"></i></div>
+                <div class="card-info">
+                  <h3>Disputed Claims</h3>
+                  <p class="metric-value" id="report-disputes">0</p>
+                  <span class="metric-trend down"><i class="fa-solid fa-arrow-down"></i> 0% rate</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="analytics-charts-grid">
+            <!-- Spend Chart -->
+            <div class="glass-card panel">
+              <div class="panel-header">
+                <h2>Spend Evolution & PO Allocations</h2>
+              </div>
+              <div class="panel-content chart-box">
+                <svg id="analytics-spend-svg" viewBox="0 0 500 240"></svg>
+              </div>
+            </div>
+
+            <!-- Categories pie -->
+            <div class="glass-card panel">
+              <div class="panel-header">
+                <h2>Spend by Category Distribution</h2>
+              </div>
+              <div class="panel-content chart-box flex-row align-center justify-around">
+                <svg id="analytics-category-svg" viewBox="0 0 200 200" style="max-width: 180px;"></svg>
+                <div class="chart-legend" id="analytics-category-legend">
+                  <!-- filled dynamically -->
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom: Top vendors details -->
+          <div class="glass-card panel margin-top-lg">
+            <div class="panel-header">
+              <h2>Top Suppliers by Volume & Quality Rank</h2>
+            </div>
+            <div class="panel-content table-wrapper">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Vendor</th>
+                    <th>Category</th>
+                    <th>Spend Contribution</th>
+                    <th>Orders Approved</th>
+                    <th>Avg Delivery Time</th>
+                    <th>Compliance Score</th>
+                  </tr>
+                </thead>
+                <tbody id="analytics-vendor-table-body">
+                  <!-- dynamically filled -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- 9. ACTIVITY LOGS VIEW -->
+        <section id="view-logs" class="app-view">
+          <div class="view-header-bar">
+            <div class="search-filter-row">
+              <div class="search-box">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="logs-search" placeholder="Search system audit trails...">
+              </div>
+              <div class="filter-dropdown-group">
+                <div class="btn-group-filters" id="log-level-filter-buttons">
+                  <button class="btn-filter active-filter" data-level="ALL">All Levels</button>
+                  <button class="btn-filter text-info" data-level="INFO"><i class="fa-solid fa-info-circle"></i> Info</button>
+                  <button class="btn-filter text-warning" data-level="WARN"><i class="fa-solid fa-triangle-exclamation"></i> Warning</button>
+                  <button class="btn-filter text-danger" data-level="ERROR"><i class="fa-solid fa-circle-xmark"></i> Error</button>
+                </div>
+              </div>
+            </div>
+            <button class="btn btn-secondary" id="btn-logs-export-csv"><i class="fa-solid fa-file-csv"></i> Export CSV</button>
+          </div>
+
+          <div class="glass-card table-wrapper">
+            <table class="data-table" id="logs-table">
+              <thead>
+                <tr>
+                  <th>Timestamp</th>
+                  <th>Module</th>
+                  <th>Level</th>
+                  <th>Trigger User</th>
+                  <th>Message / Action Details</th>
+                </tr>
+              </thead>
+              <tbody id="logs-table-body">
+                <!-- dynamically loaded -->
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- ================= ADD VENDOR MODAL ================= -->
+  <div id="modal-add-vendor" class="modal-overlay">
+    <div class="modal-card glass-card">
+      <div class="modal-header">
+        <h3><i class="fa-solid fa-handshake-simple"></i> Register New Vendor</h3>
+        <button class="btn-close-modal" id="btn-close-vendor-modal"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <form id="form-add-vendor">
+        <div class="form-group">
+          <label for="vendor-name">Company Name</label>
+          <input type="text" id="vendor-name" required placeholder="e.g. Staples Office Solutions">
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="vendor-contact">Contact Name</label>
+            <input type="text" id="vendor-contact" required placeholder="e.g. Sarah Connor">
+          </div>
+          <div class="form-group">
+            <label for="vendor-email">Contact Email</label>
+            <input type="email" id="vendor-email" required placeholder="e.g. sarah@staples.com">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="vendor-category">Primary Category</label>
+            <select id="vendor-category" class="select-input">
+              <option value="Office Supplies">Office Supplies</option>
+              <option value="IT Hardware">IT Hardware</option>
+              <option value="Furniture">Furniture</option>
+              <option value="Facilities">Facilities</option>
+              <option value="Logistics">Logistics</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="vendor-status">Initial Status</label>
+            <select id="vendor-status" class="select-input">
+              <option value="Active">Active</option>
+              <option value="Pending">Pending Approval</option>
+              <option value="Suspended">Suspended</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="vendor-address">Address</label>
+            <input type="text" id="vendor-address" required placeholder="123 Office Rd, NY">
+          </div>
+          <div class="form-group">
+            <label for="vendor-country">Country</label>
+            <input type="text" id="vendor-country" required placeholder="United States">
+          </div>
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn btn-secondary" id="btn-cancel-vendor-modal">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Vendor Profile <i class="fa-solid fa-floppy-disk"></i></button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Javascript Logic Modules -->
+  <script src="utils.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
