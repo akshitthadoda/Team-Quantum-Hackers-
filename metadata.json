@@ -1,6 +1,0 @@
-{
-  "name": "VendorBridge",
-  "description": "A precision procurement ERP, vendor management, and transaction ecosystem.",
-  "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
-}
